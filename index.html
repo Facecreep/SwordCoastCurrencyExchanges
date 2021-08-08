@@ -1,16 +1,156 @@
 <html>
-    <head>
-        <link rel="stylesheet" href="style.css">
-        <link rel="icon" href="icon.png">
+    <body onload="load()" onunload="save()">
+        <head>
+            <link rel="stylesheet" href="style.css">
+            <link rel="icon" href="icon.png">
+    
+            <title>Пошёл Дима Нафиг!</title>
+        </head>
+    
+        <h1>Пошёл Дима нафиг!</h1>
+        <p>А точнее, его экономика, пусть компьтер сам считает!</p><br><br>
+    
+        <p style="text-align: center;">У вас сейчас есть:</p>
+        <table style="width:100%;">
+            <tr>
+                <th>
+                    <div>
+                        <label for="pfennigread"> Пфенниги </label><br>
+                        <input readonly=true type="number" id="pfennigread" name="pfennigread" style="background-color: rgb(226, 226, 226)"><br>
+                    </div>
+                </th>
+                <th>
+                    <div>
+                        <label for="vittenread"> Виттены </label><br>
+                        <input readonly=true type="number" id="vittenread" name="vittenread" style="background-color: rgb(226, 226, 226)"><br>
+                    </div>
+                </th>
+                <th>
+                    <div>
+                        <label for="zekelingread"> Зэкелинг </label><br>
+                        <input readonly=true type="number" id="zekelingread" name="zekelingread" style="background-color: rgb(226, 226, 226)"><br>
+                    </div>
+                </th>
+                <th>
+                    <div>
+                        <label for="shillingread"> Шиллинг </label><br>
+                        <input readonly=true type="number" id="shillingread" name="shillingread" style="background-color: rgb(226, 226, 226)"><br>
+                    </div>
+                </th>
+                <th>
+                    <div>
+                        <label for="markread"> Марки </label><br>
+                        <input readonly=false type="number" id="markread" name="markread" style="background-color: rgb(226, 226, 226)"><br>
+                    </div>
+                </th>
+            </tr>
+        </table><br><br>
+    
+    
+        <p style="text-align: center;">Надо:</p>
+        <table style="width:100%;">
+            <tr>
+                <th>
+                    <div>
+                        <label for="pfennigwrite"> Пфенниги </label><br>
+                        <input type="number" id="pfennigwrite" name="pfennigwrite"><br>
+                    </div>
+                </th>
+                <th>
+                    <div>
+                        <label for="vittenwrite"> Виттены </label><br>
+                        <input type="number" id="vittenwrite" name="vittenwrite"><br>
+                    </div>
+                </th>
+                <th>
+                    <div>
+                        <label for="zekelingwrite"> Зэкелинг </label><br>
+                        <input type="number" id="zekelingwrite" name="zekelingwrite"><br>
+                    </div>
+                </th>
+                <th>
+                    <div>
+                        <label for="shillingwrite"> Шиллинг </label><br>
+                        <input type="number" id="shillingwrite" name="shillingwrite"><br>
+                    </div>
+                </th>
+                <th>
+                    <div>
+                        <label for="markwrite"> Марки </label><br>
+                        <input type="number" id="markwrite" name="markwrite"><br>
+                    </div>
+                </th>
+            </tr>
+        </table>
+    
+        <div style="margin: auto; width: 30%;">
+            <button style="width: 50%; float: left;" onclick="add()">Добавить</button>
+            <button style="width: 50%; float: right;" onclick="load()">Загрузить</button>
+        </div>
+    
+        <script>
+            function save(){
+                localStorage.setItem("pfennig", document.getElementById("pfennigread").value);
+                localStorage.setItem("vitten", document.getElementById("vittenread").value);
+                localStorage.setItem("zekeling", document.getElementById("zekelingread").value);
+                localStorage.setItem("shilling", document.getElementById("shillingread").value);
+                localStorage.setItem("mark", document.getElementById("markread").value);
+            }
+    
+            function load(){
+                if(localStorage.getItem("pfennig") === null || localStorage.getItem("pfennig") === ""){
+                    document.getElementById("pfennigread").value = 0;
+                }else{
+                    document.getElementById("pfennigread").value = localStorage.getItem("pfennig");
+                }
+                if(localStorage.getItem("vitten") === null || localStorage.getItem("vitten") === ""){
+                    document.getElementById("vittenread").value = 0;
+                }else{
+                    document.getElementById("vittenread").value = localStorage.getItem("vitten");
+                }
+                if(localStorage.getItem("zekeling") === null || localStorage.getItem("zekeling") === ""){
+                    document.getElementById("zekelingread").value = 0;
+                }else{
+                    document.getElementById("zekelingread").value = localStorage.getItem("zekeling");
+                }
+                if(localStorage.getItem("shilling") === null || localStorage.getItem("shilling") === ""){
+                    document.getElementById("shillingread").value = 0;
+                }else{
+                    document.getElementById("shillingread").value = localStorage.getItem("shilling");
+                }
+                if(localStorage.getItem("mark") === null || localStorage.getItem("mark") === ""){
+                    document.getElementById("markread").value = 0;
+                }else{
+                    document.getElementById("markread").value = localStorage.getItem("mark");
+                }
+            }
 
-        <title>Пошёл Дима Нафиг!</title>
-    </head>
+            function add(){
+                if(document.getElementById("pfennigwrite").value === ""){
+                    document.getElementById("pfennigwrite").value = 0;
+                }
+                document.getElementById("pfennigread").value = parseInt(document.getElementById("pfennigread").value) + parseInt(document.getElementById("pfennigwrite").value);
 
-    <h1>Пошёл Дима нафиг!</h1>
-    <p>А точнее, его экономика, пусть компьтер сам считает!</p>
-
-    <div>
-        <label for="pfennig"> Пфенниги </label><br>
-        <input type="text" id="pfennig" name="pfennig"><br>
-    </div>
+                if(document.getElementById("vittenwrite").value === ""){
+                    document.getElementById("vittenwrite").value = 0;
+                }
+                document.getElementById("vittenread").value = parseInt(document.getElementById("vittenread").value) + parseInt(document.getElementById("vittenwrite").value);
+                
+                if(document.getElementById("zekelingwrite").value === ""){
+                    document.getElementById("zekelingwrite").value = 0;
+                }
+                document.getElementById("zekelingread").value = parseInt(document.getElementById("zekelingread").value) + parseInt(document.getElementById("zekelingwrite").value);
+                
+                if(document.getElementById("shillingwrite").value === ""){
+                    document.getElementById("shillingwrite").value = 0;
+                }
+                document.getElementById("shillingread").value = parseInt(document.getElementById("shillingread").value) + parseInt(document.getElementById("shillingwrite").value);
+                
+                if(document.getElementById("markwrite").value === ""){
+                    document.getElementById("markwrite").value = 0;
+                }
+                document.getElementById("markread").value = parseInt(document.getElementById("markread").value) + parseInt(document.getElementById("markwrite").value);
+            }
+        </script>
+    </body>
 </html>
