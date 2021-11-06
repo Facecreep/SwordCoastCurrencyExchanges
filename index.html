@@ -1,156 +1,242 @@
 <html>
-    <body onload="load()" onunload="save()">
-        <head>
-            <link rel="stylesheet" href="style.css">
-            <link rel="icon" href="icon.png">
-    
-            <title>Пошёл Дима Нафиг!</title>
-        </head>
-    
-        <h1>Пошёл Дима нафиг!</h1>
-        <p>А точнее, его экономика, пусть компьтер сам считает!</p><br><br>
-    
-        <p style="text-align: center;">У вас сейчас есть:</p>
-        <table style="width:100%;">
-            <tr>
-                <th>
-                    <div>
-                        <label for="pfennigread"> Пфенниги </label><br>
-                        <input readonly=true type="number" id="pfennigread" name="pfennigread" style="background-color: rgb(226, 226, 226)"><br>
-                    </div>
-                </th>
-                <th>
-                    <div>
-                        <label for="vittenread"> Виттены </label><br>
-                        <input readonly=true type="number" id="vittenread" name="vittenread" style="background-color: rgb(226, 226, 226)"><br>
-                    </div>
-                </th>
-                <th>
-                    <div>
-                        <label for="zekelingread"> Зэкелинг </label><br>
-                        <input readonly=true type="number" id="zekelingread" name="zekelingread" style="background-color: rgb(226, 226, 226)"><br>
-                    </div>
-                </th>
-                <th>
-                    <div>
-                        <label for="shillingread"> Шиллинг </label><br>
-                        <input readonly=true type="number" id="shillingread" name="shillingread" style="background-color: rgb(226, 226, 226)"><br>
-                    </div>
-                </th>
-                <th>
-                    <div>
-                        <label for="markread"> Марки </label><br>
-                        <input readonly=false type="number" id="markread" name="markread" style="background-color: rgb(226, 226, 226)"><br>
-                    </div>
-                </th>
-            </tr>
-        </table><br><br>
-    
-    
-        <p style="text-align: center;">Надо:</p>
-        <table style="width:100%;">
-            <tr>
-                <th>
-                    <div>
-                        <label for="pfennigwrite"> Пфенниги </label><br>
-                        <input type="number" id="pfennigwrite" name="pfennigwrite"><br>
-                    </div>
-                </th>
-                <th>
-                    <div>
-                        <label for="vittenwrite"> Виттены </label><br>
-                        <input type="number" id="vittenwrite" name="vittenwrite"><br>
-                    </div>
-                </th>
-                <th>
-                    <div>
-                        <label for="zekelingwrite"> Зэкелинг </label><br>
-                        <input type="number" id="zekelingwrite" name="zekelingwrite"><br>
-                    </div>
-                </th>
-                <th>
-                    <div>
-                        <label for="shillingwrite"> Шиллинг </label><br>
-                        <input type="number" id="shillingwrite" name="shillingwrite"><br>
-                    </div>
-                </th>
-                <th>
-                    <div>
-                        <label for="markwrite"> Марки </label><br>
-                        <input type="number" id="markwrite" name="markwrite"><br>
-                    </div>
-                </th>
-            </tr>
-        </table>
-    
-        <div style="margin: auto; width: 30%;">
-            <button style="width: 50%; float: left;" onclick="add()">Добавить</button>
-            <button style="width: 50%; float: right;" onclick="load()">Загрузить</button>
-        </div>
-    
-        <script>
-            function save(){
-                localStorage.setItem("pfennig", document.getElementById("pfennigread").value);
-                localStorage.setItem("vitten", document.getElementById("vittenread").value);
-                localStorage.setItem("zekeling", document.getElementById("zekelingread").value);
-                localStorage.setItem("shilling", document.getElementById("shillingread").value);
-                localStorage.setItem("mark", document.getElementById("markread").value);
+<body onload="load()" onunload="save()">
+    <head>
+        <link rel="stylesheet" href="style.css">
+        <link rel="icon" href="icon.png">
+
+        <title>Пошёл Дима Нафиг!</title>
+    </head>
+
+    <h1>Пошёл Дима нафиг!</h1>
+    <p>А точнее, его экономика, пусть компьтер сам считает!</p><br><br>
+
+    <p id="pfennigsInVitten">Пфеннигов в виттене: </p>
+    <p id="vittensInZekeling">Виттенов в зэкэлинге: </p>
+    <p id="zekelingsInShilling">Зэкелингов в шиллинге: </p>
+    <p id="shillingsInMark">Шиллигов в марке: </p>
+
+    <p style="text-align: center;">У вас сейчас есть:</p>
+    <table style="width:100%;">
+        <tr>
+            <th>
+                <div>
+                    <label for="pfennigread"> Пфенниги </label><br>
+                    <input readonly=true type="number" id="pfennigread" name="pfennigread" style="background-color: rgb(226, 226, 226)"><br>
+                </div>
+            </th>
+            <th>
+                <div>
+                    <label for="vittenread"> Виттены </label><br>
+                    <input readonly=true type="number" id="vittenread" name="vittenread" style="background-color: rgb(226, 226, 226)"><br>
+                </div>
+            </th>
+            <th>
+                <div>
+                    <label for="zekelingread"> Зэкелинг </label><br>
+                    <input readonly=true type="number" id="zekelingread" name="zekelingread" style="background-color: rgb(226, 226, 226)"><br>
+                </div>
+            </th>
+            <th>
+                <div>
+                    <label for="shillingread"> Шиллинг </label><br>
+                    <input readonly=true type="number" id="shillingread" name="shillingread" style="background-color: rgb(226, 226, 226)"><br>
+                </div>
+            </th>
+            <th>
+                <div>
+                    <label for="markread"> Марки </label><br>
+                    <input readonly=false type="number" id="markread" name="markread" style="background-color: rgb(226, 226, 226)"><br>
+                </div>
+            </th>
+        </tr>
+    </table><br><br>
+
+
+    <p style="text-align: center;">Надо:</p>
+    <table style="width:100%;">
+        <tr>
+            <th>
+                <div>
+                    <label for="pfennigwrite"> Пфенниги </label><br>
+                    <input type="number" id="pfennigwrite" name="pfennigwrite"><br>
+                </div>
+            </th>
+            <th>
+                <div>
+                    <label for="vittenwrite"> Виттены </label><br>
+                    <input type="number" id="vittenwrite" name="vittenwrite"><br>
+                </div>
+            </th>
+            <th>
+                <div>
+                    <label for="zekelingwrite"> Зэкелинг </label><br>
+                    <input type="number" id="zekelingwrite" name="zekelingwrite"><br>
+                </div>
+            </th>
+            <th>
+                <div>
+                    <label for="shillingwrite"> Шиллинг </label><br>
+                    <input type="number" id="shillingwrite" name="shillingwrite"><br>
+                </div>
+            </th>
+            <th>
+                <div>
+                    <label for="markwrite"> Марки </label><br>
+                    <input type="number" id="markwrite" name="markwrite"><br>
+                </div>
+            </th>
+        </tr>
+    </table>
+
+    <div style="margin: auto; width: 30%;">
+        <button style="width: 50%; float: left;" onclick="add()">Добавить</button>
+        <button style="width: 50%; float: right;" onclick="substract()">Вычесть</button>
+    </div>
+
+    <script>
+        var pfennigsInVitten = 12
+        var vittensInZekeling = 13
+        var zekelingsInShilling = 11
+        var shillingsInMark = 11
+
+        var totalPfennings
+        var totalVittens
+        var totalZekelings
+        var totalShillings
+        var totalMarks
+
+        function save() {
+            localStorage.setItem("pfennig", document.getElementById("pfennigread").value)
+            localStorage.setItem("vitten", document.getElementById("vittenread").value)
+            localStorage.setItem("zekeling", document.getElementById("zekelingread").value)
+            localStorage.setItem("shilling", document.getElementById("shillingread").value)
+            localStorage.setItem("mark", document.getElementById("markread").value)
+        }
+
+        function load() {
+            if (localStorage.getItem("pfennig") === null || localStorage.getItem("pfennig") === "") {
+                document.getElementById("pfennigread").value = 0
+            } else {    
+                document.getElementById("pfennigread").value = localStorage.getItem("pfennig")
             }
-    
-            function load(){
-                if(localStorage.getItem("pfennig") === null || localStorage.getItem("pfennig") === ""){
-                    document.getElementById("pfennigread").value = 0;
-                }else{
-                    document.getElementById("pfennigread").value = localStorage.getItem("pfennig");
-                }
-                if(localStorage.getItem("vitten") === null || localStorage.getItem("vitten") === ""){
-                    document.getElementById("vittenread").value = 0;
-                }else{
-                    document.getElementById("vittenread").value = localStorage.getItem("vitten");
-                }
-                if(localStorage.getItem("zekeling") === null || localStorage.getItem("zekeling") === ""){
-                    document.getElementById("zekelingread").value = 0;
-                }else{
-                    document.getElementById("zekelingread").value = localStorage.getItem("zekeling");
-                }
-                if(localStorage.getItem("shilling") === null || localStorage.getItem("shilling") === ""){
-                    document.getElementById("shillingread").value = 0;
-                }else{
-                    document.getElementById("shillingread").value = localStorage.getItem("shilling");
-                }
-                if(localStorage.getItem("mark") === null || localStorage.getItem("mark") === ""){
-                    document.getElementById("markread").value = 0;
-                }else{
-                    document.getElementById("markread").value = localStorage.getItem("mark");
-                }
+            if (localStorage.getItem("vitten") === null || localStorage.getItem("vitten") === "") {
+                document.getElementById("vittenread").value = 0
+            } else {
+                document.getElementById("vittenread").value = localStorage.getItem("vitten")
+            }
+            if (localStorage.getItem("zekeling") === null || localStorage.getItem("zekeling") === "") {
+                document.getElementById("zekelingread").value = 0
+            } else {
+                document.getElementById("zekelingread").value = localStorage.getItem("zekeling")
+            }
+            if (localStorage.getItem("shilling") === null || localStorage.getItem("shilling") === "") {
+                document.getElementById("shillingread").value = 0
+            } else {
+                document.getElementById("shillingread").value = localStorage.getItem("shilling")
+            }
+            if (localStorage.getItem("mark") === null || localStorage.getItem("mark") === "") {
+                document.getElementById("markread").value = 0
+            } else {
+                document.getElementById("markread").value = localStorage.getItem("mark")
             }
 
-            function add(){
-                if(document.getElementById("pfennigwrite").value === ""){
-                    document.getElementById("pfennigwrite").value = 0;
-                }
-                document.getElementById("pfennigread").value = parseInt(document.getElementById("pfennigread").value) + parseInt(document.getElementById("pfennigwrite").value);
+            document.getElementById("pfennigsInVitten").innerHTML = "Пфеннигов в виттене: " + pfennigsInVitten
+            document.getElementById("vittensInZekeling").innerHTML = "Виттенов в зэкэлинге: " + vittensInZekeling
+            document.getElementById("zekelingsInShilling").innerHTML = "Зэкелингов в шиллинге: " + zekelingsInShilling
+            document.getElementById("shillingsInMark").innerHTML = "Шиллигов в марке: " + shillingsInMark
+        }
 
-                if(document.getElementById("vittenwrite").value === ""){
-                    document.getElementById("vittenwrite").value = 0;
-                }
-                document.getElementById("vittenread").value = parseInt(document.getElementById("vittenread").value) + parseInt(document.getElementById("vittenwrite").value);
-                
-                if(document.getElementById("zekelingwrite").value === ""){
-                    document.getElementById("zekelingwrite").value = 0;
-                }
-                document.getElementById("zekelingread").value = parseInt(document.getElementById("zekelingread").value) + parseInt(document.getElementById("zekelingwrite").value);
-                
-                if(document.getElementById("shillingwrite").value === ""){
-                    document.getElementById("shillingwrite").value = 0;
-                }
-                document.getElementById("shillingread").value = parseInt(document.getElementById("shillingread").value) + parseInt(document.getElementById("shillingwrite").value);
-                
-                if(document.getElementById("markwrite").value === ""){
-                    document.getElementById("markwrite").value = 0;
-                }
-                document.getElementById("markread").value = parseInt(document.getElementById("markread").value) + parseInt(document.getElementById("markwrite").value);
+        function add() {
+            resetfields()
+
+            document.getElementById("pfennigread").value = parseInt(document.getElementById("pfennigread").value) + parseInt(document.getElementById("pfennigwrite").value)
+            document.getElementById("vittenread").value = parseInt(document.getElementById("vittenread").value) + parseInt(document.getElementById("vittenwrite").value)
+            document.getElementById("zekelingread").value = parseInt(document.getElementById("zekelingread").value) + parseInt(document.getElementById("zekelingwrite").value)
+            document.getElementById("shillingread").value = parseInt(document.getElementById("shillingread").value) + parseInt(document.getElementById("shillingwrite").value)
+            document.getElementById("markread").value = parseInt(document.getElementById("markread").value) + parseInt(document.getElementById("markwrite").value)
+
+            updateCurrentWealthFromField()
+        }
+
+        function substract() {
+            resetfields()
+            updateCurrentWealthFromField()
+
+            let totalPfennings
+            let totalVittens
+            let totalZekelings
+            let totalShillings
+            let totalMarks
+
+            let totalPfenningsToSubstract
+            let totalVittensToSubstract
+            let totalZekelingsToSubstract
+            let totalShillingsToSubstract
+            let totalMarksToSubstract
+
+            totalMarks = currentMarks
+            totalShillings = totalMarks * shillingsInMark + currentShillings
+            totalZekelings = totalShillings * zekelingsInShilling + currentZekelings
+            totalVittens = totalZekelings * vittensInZekeling + currentVittens
+            totalPfennings = totalVittens * pfennigsInVitten + currentPfennings
+
+            totalMarksToSubstract = parseInt(document.getElementById("markwrite").value)
+            totalShillingsToSubstract = totalMarksToSubstract * shillingsInMark + parseInt(document.getElementById("shillingwrite").value)
+            totalZekelingsToSubstract = totalShillingsToSubstract * zekelingsInShilling + parseInt(document.getElementById("zekelingwrite").value)
+            totalVittensToSubstract = totalZekelingsToSubstract * vittensInZekeling + parseInt(document.getElementById("vittenwrite").value)
+            totalPfenningsToSubstract = totalVittensToSubstract * pfennigsInVitten + parseInt(document.getElementById("pfennigwrite").value)
+        
+
+            currentPfennings = totalPfennings - totalPfenningsToSubstract
+
+            currentVittens = Math.floor(currentPfennings/pfennigsInVitten)
+            currentPfennings = currentPfennings % pfennigsInVitten
+
+            currentZekelings = Math.floor(currentVittens/vittensInZekeling)
+            currentVittens = currentVittens % vittensInZekeling
+
+            currentShillings = Math.floor(currentZekelings/zekelingsInShilling)
+            currentZekelings = currentZekelings % zekelingsInShilling
+
+            currentMarks = Math.floor(currentShillings/shillingsInMark)
+            currentShillings = currentShillings % shillingsInMark
+
+            updateCurrentWealthToField()
+        }
+
+        function resetfields() {
+            if (document.getElementById("pfennigwrite").value === "") {
+                document.getElementById("pfennigwrite").value = 0
             }
-        </script>
-    </body>
+            if (document.getElementById("vittenwrite").value === "") {
+                document.getElementById("vittenwrite").value = 0
+            }
+            if (document.getElementById("zekelingwrite").value === "") {
+                document.getElementById("zekelingwrite").value = 0
+            }
+            if (document.getElementById("shillingwrite").value === "") {
+                document.getElementById("shillingwrite").value = 0
+            }
+            if (document.getElementById("markwrite").value === "") {
+                document.getElementById("markwrite").value = 0
+            }
+        }
+
+        function updateCurrentWealthFromField(){
+            currentPfennings = parseInt(document.getElementById("pfennigread").value)
+            currentVittens = parseInt(document.getElementById("vittenread").value)
+            currentZekelings = parseInt(document.getElementById("zekelingread").value)
+            currentShillings = parseInt(document.getElementById("shillingread").value)
+            currentMarks = parseInt(document.getElementById("markread").value)
+        }
+
+        function updateCurrentWealthToField(){
+            document.getElementById("pfennigread").value = currentPfennings
+            document.getElementById("vittenread").value = currentVittens
+            document.getElementById("zekelingread").value = currentZekelings
+            document.getElementById("shillingread").value = currentShillings
+            document.getElementById("markread").value = currentMarks
+        }
+    </script>
+</body>
 </html>
